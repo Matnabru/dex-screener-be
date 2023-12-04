@@ -1,0 +1,7 @@
+# codegen.yml
+overwrite: true
+schema: "./*.graphql" # Adjust to point to your GraphQL schema files
+generates:
+  ./src/generated/graphql.ts:
+    plugins:
+      - "typescript"

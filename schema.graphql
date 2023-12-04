@@ -1,0 +1,29 @@
+type Query {
+  publicQuery: PublicQuery
+  authQuery: AuthQuery
+}
+
+type Mutation {
+  publicMutation: AuthMutation!
+  authMutation: AuthMutation!
+}
+
+type PublicQuery {
+  test: String!
+}
+
+type AuthQuery {
+  test: String!
+}
+
+type AuthMutation {
+  test: String!
+}
+
+type PublicMutation {
+  test: String!
+}
+schema{
+    mutation: Mutation
+  query: Query
+}
