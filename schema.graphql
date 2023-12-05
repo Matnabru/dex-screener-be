@@ -1,15 +1,80 @@
-type Query {
-  publicQuery: PublicQuery
-  authQuery: AuthQuery
+
+type Candle {
+  open: Float!
+  high: Float!
+  low: Float!
+  close: Float!
+  openTime: String!
+  timeframe: Timeframe!
 }
 
-type Mutation {
-  publicMutation: AuthMutation!
-  authMutation: AuthMutation!
+type Transaction {
+  type: TransactionType!
+  unit: String!
+  weth: String!
+  timestamp: String!
+  price: String!
+}
+
+enum TransactionType {
+  BUY
+  SELL
+}
+
+enum Protocol {
+	UNISWAPV2
+	UNISWAPV3
+}
+
+enum Timeframe {
+	D1
+  H4
+  H1
+  M15
+  M5
+  M1
+}
+
+type Pair {
+  name: String!
+  price: String
+  volume: Float
+  liquidity: Float
+  protocol: Protocol!
+}
+
+input GetPairInput {
+	pairAddress: String!
+  protocol: Protocol!
+}
+
+input GetOhlcInput {
+	pairAddress: String!
+  protocol: Protocol!
+  timeframe: Timeframe!
+  dateFrom: String!
+  dateTo: String!
+}
+
+input GetSwapsInput {
+  pairAddress: String!
+  protocol: Protocol!
+  timeframe: Timeframe!
+  dateFrom: String!
+  dateTo: String!
 }
 
 type PublicQuery {
   test: String!
+  getPair(
+    payload: GetPairInput!
+  ):Pair!
+  getOhlc(
+    payload: GetOhlcInput!
+  ):[Candle!]!
+  getSwaps(
+    payload: GetSwapsInput!
+  ):[Transaction!]!
 }
 
 type AuthQuery {
@@ -23,7 +88,18 @@ type AuthMutation {
 type PublicMutation {
   test: String!
 }
+
+type Mutation {
+  publicMutation: AuthMutation!
+  authMutation: AuthMutation!
+}
+
+type Query {
+  publicQuery: PublicQuery
+  authQuery: AuthQuery
+}
+
 schema{
-    mutation: Mutation
+  mutation: Mutation
   query: Query
 }

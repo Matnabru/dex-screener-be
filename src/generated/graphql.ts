@@ -24,11 +24,56 @@ export type AuthQuery = {
   test: Scalars['String']['output'];
 };
 
+export type Candle = {
+  __typename?: 'Candle';
+  close: Scalars['Float']['output'];
+  high: Scalars['Float']['output'];
+  low: Scalars['Float']['output'];
+  open: Scalars['Float']['output'];
+  openTime: Scalars['String']['output'];
+  timeframe: Timeframe;
+};
+
+export type GetOhlcInput = {
+  dateFrom: Scalars['String']['input'];
+  dateTo: Scalars['String']['input'];
+  pairAddress: Scalars['String']['input'];
+  protocol: Protocol;
+  timeframe: Timeframe;
+};
+
+export type GetPairInput = {
+  pairAddress: Scalars['String']['input'];
+  protocol: Protocol;
+};
+
+export type GetSwapsInput = {
+  dateFrom: Scalars['String']['input'];
+  dateTo: Scalars['String']['input'];
+  pairAddress: Scalars['String']['input'];
+  protocol: Protocol;
+  timeframe: Timeframe;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   authMutation: AuthMutation;
   publicMutation: AuthMutation;
 };
+
+export type Pair = {
+  __typename?: 'Pair';
+  liquidity?: Maybe<Scalars['Float']['output']>;
+  name: Scalars['String']['output'];
+  price?: Maybe<Scalars['String']['output']>;
+  protocol: Protocol;
+  volume?: Maybe<Scalars['Float']['output']>;
+};
+
+export enum Protocol {
+  Uniswapv2 = 'UNISWAPV2',
+  Uniswapv3 = 'UNISWAPV3'
+}
 
 export type PublicMutation = {
   __typename?: 'PublicMutation';
@@ -37,7 +82,25 @@ export type PublicMutation = {
 
 export type PublicQuery = {
   __typename?: 'PublicQuery';
+  getOhlc: Array<Candle>;
+  getPair: Pair;
+  getSwaps: Array<Transaction>;
   test: Scalars['String']['output'];
+};
+
+
+export type PublicQueryGetOhlcArgs = {
+  payload: GetOhlcInput;
+};
+
+
+export type PublicQueryGetPairArgs = {
+  payload: GetPairInput;
+};
+
+
+export type PublicQueryGetSwapsArgs = {
+  payload: GetSwapsInput;
 };
 
 export type Query = {
@@ -45,3 +108,26 @@ export type Query = {
   authQuery?: Maybe<AuthQuery>;
   publicQuery?: Maybe<PublicQuery>;
 };
+
+export enum Timeframe {
+  D1 = 'D1',
+  H1 = 'H1',
+  H4 = 'H4',
+  M1 = 'M1',
+  M5 = 'M5',
+  M15 = 'M15'
+}
+
+export type Transaction = {
+  __typename?: 'Transaction';
+  price: Scalars['String']['output'];
+  timestamp: Scalars['String']['output'];
+  type: TransactionType;
+  unit: Scalars['String']['output'];
+  weth: Scalars['String']['output'];
+};
+
+export enum TransactionType {
+  Buy = 'BUY',
+  Sell = 'SELL'
+}
