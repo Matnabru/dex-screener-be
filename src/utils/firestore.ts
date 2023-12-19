@@ -1,5 +1,5 @@
-import { GetOhlcInput, Protocol, Timeframe } from "src/generated/graphql";
-import { generateCandles, getBlockNumberAfterTimestamp, swapEventsWithPriceUsingBlock } from "src/web3/uniswap/uniswap";
+import { GetOhlcInput, Protocol, Timeframe } from "../generated/graphql";
+import { generateCandles, getBlockNumberAfterTimestamp, swapEventsWithPriceUsingBlock } from "../web3/uniswap/uniswap";
 import { groupCandlesByDay, groupCandlesByMonth, groupCandlesByYear, storeAndUpdateCandles } from "./candles";
 
 export async function getOhlcData(input: GetOhlcInput, db: FirebaseFirestore.Firestore): Promise<any> {

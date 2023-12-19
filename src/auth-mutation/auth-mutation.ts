@@ -1,5 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { AuthMutation as AuthMutationType } from 'src/generated/graphql';
+import { AuthMutation as AuthMutationType } from '../generated/graphql';
 
 @ObjectType()
 export class AuthMutation {

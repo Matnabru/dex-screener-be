@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PublicQueryResolver } from './public-query.resolver';
+import { PublicQueryResolver } from './public-query.resolver';  
 
 describe('PublicQueryResolver', () => {
   let resolver: PublicQueryResolver;

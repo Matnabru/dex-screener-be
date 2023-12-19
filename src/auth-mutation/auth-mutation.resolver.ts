@@ -1,5 +1,5 @@
 import { Mutation, Resolver } from '@nestjs/graphql';
-import { FirebaseAuthGuard } from 'src/firebase/firebase-auth.guard';
+import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
 import { AuthMutation } from './auth-mutation';
 import { UseGuards } from '@nestjs/common';
 

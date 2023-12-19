@@ -1,6 +1,6 @@
 import { ObjectType, Field, Args } from '@nestjs/graphql';
-import { AddPairInput, PublicMutation as PublicMutationType } from 'src/generated/graphql';
-import { getPairDetails } from 'src/web3/uniswap/uniswap';
+import { AddPairInput, PublicMutation as PublicMutationType } from '../generated/graphql';
+import { getPairDetails } from '../web3/uniswap/uniswap';
 import * as admin from 'firebase-admin';
 @ObjectType()
 export class PublicMutation {

@@ -1,10 +1,12 @@
 import { ObjectType, Field, Args } from '@nestjs/graphql';
-import { GetOhlcInput, GetPairInput, GetSwapsInput, Protocol, PublicQuery as PublicQueryType, Timeframe } from 'src/generated/graphql';
-import { generateCandles, getBlockNumberAfterTimestamp, swapEventsWithPrice, swapEventsWithPriceUsingBlock } from 'src/web3/uniswap/uniswap';
+import { GetOhlcInput, GetPairInput, GetSwapsInput, Protocol, PublicQuery as PublicQueryType, Timeframe } from '../generated/graphql';
+import { generateCandles, getBlockNumberAfterTimestamp, swapEventsWithPrice, swapEventsWithPriceUsingBlock } from '../web3/uniswap/uniswap';
 import * as admin from 'firebase-admin';
-import { formatDateToYYYYMMDD } from 'src/utils/dates';
-import { combineCandleData, groupCandlesByDay, groupCandlesByMonth, groupCandlesByYear, storeAndUpdateCandles } from 'src/utils/candles';
-import { getOhlcData, refetchData } from 'src/utils/firestore';
+import {  groupCandlesByDay, groupCandlesByMonth, groupCandlesByYear, storeAndUpdateCandles } from '../utils/candles';
+import { getOhlcData, refetchData } from '../utils/firestore';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 @ObjectType()
 export class PublicQuery {
   @Field(() => String)

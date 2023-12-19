@@ -1,4 +1,4 @@
-import { Candle } from "src/generated/graphql";
+import { Candle } from "../generated/graphql";
 
 export function combineCandleData(existingCandles: Candle[], newCandles: Candle[]): Candle[] {
   // Check if there is an overlap in the candle data

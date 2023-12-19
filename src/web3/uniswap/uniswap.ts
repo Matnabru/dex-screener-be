@@ -1,7 +1,7 @@
 import Web3 from 'web3';
 import BigNumber from 'bignumber.js';
 import { abi as uniswapPairABI } from './IUniswapV2Pair.json';
-import { Candle, Pair, Protocol, Timeframe, Transaction } from 'src/generated/graphql';
+import { Candle, Pair, Protocol, Timeframe, Transaction } from '../../generated/graphql';
 
 const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/fe053da3410d481f8537499a08bdfe7b'));
 

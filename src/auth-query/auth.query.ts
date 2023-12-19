@@ -1,5 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { AuthQuery as AuthQueryType} from 'src/generated/graphql';
+import { AuthQuery as AuthQueryType} from '../generated/graphql';
 
 @ObjectType()
 export class AuthQuery {
