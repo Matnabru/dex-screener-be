@@ -14,6 +14,11 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type AddPairInput = {
+  pairAddress: Scalars['String']['input'];
+  protocol: Protocol;
+};
+
 export type AuthMutation = {
   __typename?: 'AuthMutation';
   test: Scalars['String']['output'];
@@ -30,8 +35,8 @@ export type Candle = {
   high: Scalars['Float']['output'];
   low: Scalars['Float']['output'];
   open: Scalars['Float']['output'];
-  openTime: Scalars['String']['output'];
-  timeframe: Timeframe;
+  time: Scalars['String']['output'];
+  timeFrame: Timeframe;
 };
 
 export type GetOhlcInput = {
@@ -47,27 +52,38 @@ export type GetPairInput = {
   protocol: Protocol;
 };
 
+export type GetPairsInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  protocol?: InputMaybe<Protocol>;
+};
+
 export type GetSwapsInput = {
   dateFrom: Scalars['String']['input'];
   dateTo: Scalars['String']['input'];
+  number?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
   pairAddress: Scalars['String']['input'];
   protocol: Protocol;
-  timeframe: Timeframe;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   authMutation: AuthMutation;
-  publicMutation: AuthMutation;
+  publicMutation: PublicMutation;
 };
 
 export type Pair = {
   __typename?: 'Pair';
-  liquidity?: Maybe<Scalars['Float']['output']>;
+  longName?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
-  price?: Maybe<Scalars['String']['output']>;
+  price: Scalars['String']['output'];
   protocol: Protocol;
-  volume?: Maybe<Scalars['Float']['output']>;
+  reserve0: Scalars['String']['output'];
+  reserve1: Scalars['String']['output'];
+  symbol0: Scalars['String']['output'];
+  symbol1: Scalars['String']['output'];
+  token0Decimals: Scalars['String']['output'];
+  token1Decimals: Scalars['String']['output'];
 };
 
 export enum Protocol {
@@ -77,14 +93,23 @@ export enum Protocol {
 
 export type PublicMutation = {
   __typename?: 'PublicMutation';
+  addPair?: Maybe<Scalars['Boolean']['output']>;
   test: Scalars['String']['output'];
+};
+
+
+export type PublicMutationAddPairArgs = {
+  payload: AddPairInput;
 };
 
 export type PublicQuery = {
   __typename?: 'PublicQuery';
   getOhlc: Array<Candle>;
+  getOhlcDirectly: Array<Candle>;
   getPair: Pair;
+  getPairs: Array<Pair>;
   getSwaps: Array<Transaction>;
+  loadOhlc: Array<Candle>;
   test: Scalars['String']['output'];
 };
 
@@ -94,13 +119,28 @@ export type PublicQueryGetOhlcArgs = {
 };
 
 
+export type PublicQueryGetOhlcDirectlyArgs = {
+  payload: GetOhlcInput;
+};
+
+
 export type PublicQueryGetPairArgs = {
   payload: GetPairInput;
 };
 
 
+export type PublicQueryGetPairsArgs = {
+  payload: GetPairsInput;
+};
+
+
 export type PublicQueryGetSwapsArgs = {
   payload: GetSwapsInput;
+};
+
+
+export type PublicQueryLoadOhlcArgs = {
+  payload: GetOhlcInput;
 };
 
 export type Query = {
@@ -121,7 +161,9 @@ export enum Timeframe {
 export type Transaction = {
   __typename?: 'Transaction';
   price: Scalars['String']['output'];
+  sender: Scalars['String']['output'];
   timestamp: Scalars['String']['output'];
+  to: Scalars['String']['output'];
   type: TransactionType;
   unit: Scalars['String']['output'];
   weth: Scalars['String']['output'];
@@ -131,3 +173,14 @@ export enum TransactionType {
   Buy = 'BUY',
   Sell = 'SELL'
 }
+
+export type Token = {
+  __typename?: 'token';
+  latestPrice?: Maybe<Scalars['Float']['output']>;
+  numberOfDecimals: Scalars['Int']['output'];
+  pairAddress: Scalars['String']['output'];
+  price1d?: Maybe<Scalars['Float']['output']>;
+  price15?: Maybe<Scalars['Float']['output']>;
+  price60?: Maybe<Scalars['Float']['output']>;
+  protocol: Protocol;
+};

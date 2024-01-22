@@ -4,8 +4,8 @@ type Candle {
   high: Float!
   low: Float!
   close: Float!
-  openTime: String!
-  timeframe: Timeframe!
+  time: String!
+  timeFrame: Timeframe!
 }
 
 type Transaction {
@@ -14,6 +14,8 @@ type Transaction {
   weth: String!
   timestamp: String!
   price: String!
+  sender: String!
+  to: String!
 }
 
 enum TransactionType {
@@ -35,11 +37,26 @@ enum Timeframe {
   M1
 }
 
+type token {
+  pairAddress: String!
+  numberOfDecimals: Int!
+  latestPrice: Float
+  price15: Float
+  price60: Float
+  price1d: Float
+  protocol: Protocol!
+}
+
 type Pair {
   name: String!
-  price: String
-  volume: Float
-  liquidity: Float
+  longName: String
+  price: String!
+  reserve0: String!
+  reserve1: String!
+  symbol0: String!
+  symbol1: String!
+  token0Decimals: String!
+  token1Decimals: String!
   protocol: Protocol!
 }
 
@@ -59,9 +76,20 @@ input GetOhlcInput {
 input GetSwapsInput {
   pairAddress: String!
   protocol: Protocol!
-  timeframe: Timeframe!
   dateFrom: String!
   dateTo: String!
+  number: Int
+  page: Int
+}
+
+input AddPairInput {
+  pairAddress: String!
+  protocol: Protocol!
+}
+
+input GetPairsInput {
+  name: String
+  protocol: Protocol
 }
 
 type PublicQuery {
@@ -72,9 +100,18 @@ type PublicQuery {
   getOhlc(
     payload: GetOhlcInput!
   ):[Candle!]!
+  loadOhlc(
+    payload: GetOhlcInput!
+  ):[Candle!]!
+  getOhlcDirectly(
+    payload: GetOhlcInput!
+  ):[Candle!]!
   getSwaps(
     payload: GetSwapsInput!
   ):[Transaction!]!
+  getPairs(
+    payload: GetPairsInput!
+  ):[Pair!]!
 }
 
 type AuthQuery {
@@ -87,10 +124,13 @@ type AuthMutation {
 
 type PublicMutation {
   test: String!
+  addPair(
+    payload: AddPairInput!
+  ): Boolean
 }
 
 type Mutation {
-  publicMutation: AuthMutation!
+  publicMutation: PublicMutation!
   authMutation: AuthMutation!
 }
 
