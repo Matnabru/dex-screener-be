@@ -38,3 +38,6 @@ exports.minuteFunction = functions.pubsub
 
     return null;
   });
+
+
+  
