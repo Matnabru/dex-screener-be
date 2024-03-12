@@ -4,7 +4,7 @@
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
 ## Description
-  <p align="center">Nest.js starter project with Graphql and Typescript implemented in SCHEMA FIRST approach.</p>
+  <p align="center">Dex Screener for saving data directly from blockchain (UniswapV2) to firestore for further on-chain analysis.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 
